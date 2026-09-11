@@ -1,0 +1,110 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "This candle device has already been configured with this infrared entity.",
+      "no_infrared_entities": "[%key:common::config_flow::abort::no_infrared_entities%]"
+    },
+    "error": {
+      "missing_infrared_entity": "Select an infrared emitter or receiver."
+    },
+    "step": {
+      "candle": {
+        "data": {
+          "infrared_entity_id": "[%key:common::config_flow::data::infrared_entity_id%]",
+          "infrared_receiver_entity_id": "[%key:common::config_flow::data::infrared_receiver_entity_id%]"
+        },
+        "data_description": {
+          "infrared_entity_id": "[%key:common::config_flow::data_description::infrared_entity_id%]",
+          "infrared_receiver_entity_id": "Optional — allows the integration to detect when the physical remote is used."
+        },
+        "description": "Select an infrared emitter for your LED candle.",
+        "title": "Set up LED Candle"
+      },
+      "candle_string": {
+        "data": {
+          "infrared_entity_id": "[%key:common::config_flow::data::infrared_entity_id%]",
+          "infrared_receiver_entity_id": "[%key:common::config_flow::data::infrared_receiver_entity_id%]"
+        },
+        "data_description": {
+          "infrared_entity_id": "[%key:common::config_flow::data_description::infrared_entity_id%]",
+          "infrared_receiver_entity_id": "Optional — allows the integration to detect when the physical remote is used."
+        },
+        "description": "Select an infrared emitter for your candle string/set.",
+        "title": "Set up Candle String"
+      },
+      "user": {
+        "description": "Select the type of candle device to set up.",
+        "menu_options": {
+          "candle": "Single candle",
+          "candle_string": "Candle string/set"
+        },
+        "title": "Set up LED Candle IR"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "power": {
+        "name": "Power"
+      },
+      "power_on": {
+        "name": "Power on"
+      },
+      "power_off": {
+        "name": "Power off"
+      },
+      "flicker": {
+        "name": "Flicker mode"
+      },
+      "flat": {
+        "name": "Flat mode"
+      },
+      "brightness_up": {
+        "name": "Brightness up"
+      },
+      "brightness_down": {
+        "name": "Brightness down"
+      },
+      "color_temp_warm": {
+        "name": "Color temp warm"
+      },
+      "color_temp_cool": {
+        "name": "Color temp cool"
+      },
+      "timer_1h": {
+        "name": "Timer 1 hour"
+      },
+      "timer_2h": {
+        "name": "Timer 2 hours"
+      },
+      "timer_4h": {
+        "name": "Timer 4 hours"
+      },
+      "timer_8h": {
+        "name": "Timer 8 hours"
+      }
+    },
+    "select": {
+      "effect_mode": {
+        "name": "Effect mode",
+        "state": {
+          "flicker": "Flicker",
+          "flat": "Flat"
+        }
+      },
+      "brightness": {
+        "name": "Brightness",
+        "state": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        }
+      }
+    },
+    "switch": {
+      "color_temperature": {
+        "name": "Color temperature"
+      }
+    }
+  }
+}
