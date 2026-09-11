@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from homeassistant.components.infrared import InfraredEmitterConsumerEntity
 from homeassistant.components.select import SelectEntity
 from homeassistant.config_entries import ConfigEntry
@@ -42,10 +44,12 @@ async def async_setup_entry(
         return
 
     device_name = entry.options.get("device_name", "LED Candle")
-    async_add_entities([
-        CandleEffectSelect(entry, infrared_entity_id, device_name),
-        CandleBrightnessSelect(entry, infrared_entity_id, device_name),
-    ])
+    async_add_entities(
+        [
+            CandleEffectSelect(entry, infrared_entity_id, device_name),
+            CandleBrightnessSelect(entry, infrared_entity_id, device_name),
+        ]
+    )
 
 
 class CandleEffectSelect(
@@ -56,7 +60,7 @@ class CandleEffectSelect(
     _attr_assumed_state = True
     _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "effect_mode"
-    _attr_options = list(EFFECT_MODES.keys())
+    _attr_options: ClassVar[list[str]] = list(EFFECT_MODES.keys())
 
     def __init__(
         self, entry: ConfigEntry, emitter_entity_id: str, device_name: str
@@ -92,7 +96,7 @@ class CandleBrightnessSelect(
     _attr_assumed_state = True
     _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "brightness"
-    _attr_options = BRIGHTNESS_LEVELS
+    _attr_options: ClassVar[list[str]] = BRIGHTNESS_LEVELS
 
     def __init__(
         self, entry: ConfigEntry, emitter_entity_id: str, device_name: str
@@ -115,6 +119,8 @@ class CandleBrightnessSelect(
 
     async def async_select_option(self, option: str) -> None:
         """Send the IR code for the chosen brightness."""
-        await self._send_command(CandleCommand.to_nec_command(BRIGHTNESS_COMMANDS[option]))
+        await self._send_command(
+            CandleCommand.to_nec_command(BRIGHTNESS_COMMANDS[option])
+        )
         self._attr_current_option = option
         self.async_write_ha_state()

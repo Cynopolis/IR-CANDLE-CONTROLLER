@@ -6,9 +6,10 @@ import logging
 from typing import Any
 
 import voluptuous as vol
-
 from homeassistant.components.infrared import (
     DOMAIN as INFRARED_DOMAIN,
+)
+from homeassistant.components.infrared import (
     async_get_emitters,
     async_get_receivers,
 )
@@ -103,27 +104,29 @@ class CandleIrConfigFlow(ConfigFlow, domain=DOMAIN):
         """Handle device setup steps."""
         errors: dict[str, str] = {}
 
-        if user_input is not None:
-            if user_input.get(CONF_INFRARED_ENTITY_ID) or user_input.get(
-                CONF_INFRARED_RECEIVER_ENTITY_ID
-            ):
-                emitter_id = user_input.get(CONF_INFRARED_ENTITY_ID)
-                receiver_id = user_input.get(CONF_INFRARED_RECEIVER_ENTITY_ID)
-                title_entity_id = emitter_id or receiver_id
+        if user_input is not None and (
+            user_input.get(CONF_INFRARED_ENTITY_ID)
+            or user_input.get(CONF_INFRARED_RECEIVER_ENTITY_ID)
+        ):
+            emitter_id = user_input.get(CONF_INFRARED_ENTITY_ID)
+            receiver_id = user_input.get(CONF_INFRARED_RECEIVER_ENTITY_ID)
+            title_entity_id = emitter_id or receiver_id
 
-                if title_entity_id:
-                    self._async_abort_entries_match({
+            if title_entity_id:
+                self._async_abort_entries_match(
+                    {
                         CONF_INFRARED_ENTITY_ID: emitter_id,
-                    })
-                    return self.async_create_entry(
-                        title=f"Candle via {self._entity_name(title_entity_id)}",
-                        data={
-                            "device_type": device_type,
-                            CONF_INFRARED_ENTITY_ID: emitter_id,
-                            CONF_INFRARED_RECEIVER_ENTITY_ID: receiver_id,
-                        },
-                    )
-                errors["base"] = "missing_infrared_entity"
+                    }
+                )
+                return self.async_create_entry(
+                    title=f"Candle via {self._entity_name(title_entity_id)}",
+                    data={
+                        "device_type": device_type,
+                        CONF_INFRARED_ENTITY_ID: emitter_id,
+                        CONF_INFRARED_RECEIVER_ENTITY_ID: receiver_id,
+                    },
+                )
+            errors["base"] = "missing_infrared_entity"
 
         return self.async_show_form(
             step_id=device_type,

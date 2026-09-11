@@ -219,6 +219,45 @@ Runs on every push/PR. Two jobs:
 
 ---
 
+## Code Quality
+
+A Python virtual environment with **ruff** (linter + formatter) is provided in `.venv/`.
+
+### Running the linter and formatter
+
+After making any code changes, always run these commands before committing:
+
+```bash
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Format all Python files (auto-fixes style issues)
+ruff format ./custom_components/
+
+# Lint all Python files (fails on errors, warns on style issues)
+ruff check ./custom_components/
+```
+
+Or run both in one step:
+```bash
+source .venv/bin/activate
+ruff format --check ./custom_components/ && ruff check ./custom_components/
+```
+
+### What ruff checks
+
+- **F401** — Unused imports (must be removed or re-exported)
+- **F821** — Undefined names
+- **SIM102** — Nested `if` statements (combine with `and`)
+- **RUF012** — Mutable default values for class attributes (use `ClassVar`)
+- **I001** — Unsorted imports
+- **E/W** — Pyflakes / pycodestyle errors
+- **F** — Pyflakes errors
+
+The CI pipeline (`ci.yml`) runs the same checks, so local validation catches what would fail in CI.
+
+---
+
 ## Common Modification Patterns
 
 ### Adding a new button

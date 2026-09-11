@@ -61,7 +61,9 @@ async def async_setup_entry(
     )
 
 
-class CandleSwitch(CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, RestoreEntity):
+class CandleSwitch(
+    CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, RestoreEntity
+):
     """A Candle IR feature toggled by infrared codes."""
 
     _attr_assumed_state = True
@@ -75,7 +77,9 @@ class CandleSwitch(CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, Re
         device_name: str,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(entry, unique_id_suffix=description.key, device_name=device_name)
+        super().__init__(
+            entry, unique_id_suffix=description.key, device_name=device_name
+        )
         self._infrared_emitter_entity_id = emitter_entity_id
         self.entity_description = description
         self._attr_is_on = False
@@ -92,7 +96,9 @@ class CandleSwitch(CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, Re
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the feature on."""
-        await self._send_command(CandleCommand.to_nec_command(self.entity_description.on_code))
+        await self._send_command(
+            CandleCommand.to_nec_command(self.entity_description.on_code)
+        )
         self._attr_is_on = True
         self.async_write_ha_state()
 

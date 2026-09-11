@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
 
 from homeassistant.components.button import ButtonEntity, ButtonEntityDescription
 from homeassistant.components.infrared import InfraredEmitterConsumerEntity
@@ -33,7 +32,9 @@ CANDLE_BUTTON_DESCRIPTIONS: tuple[CandleButtonEntityDescription, ...] = (
         key="power_on", translation_key="power_on", command_code=CandleCommand.POWER_ON
     ),
     CandleButtonEntityDescription(
-        key="power_off", translation_key="power_off", command_code=CandleCommand.POWER_OFF
+        key="power_off",
+        translation_key="power_off",
+        command_code=CandleCommand.POWER_OFF,
     ),
     CandleButtonEntityDescription(
         key="flicker", translation_key="flicker", command_code=CandleCommand.FLICKER

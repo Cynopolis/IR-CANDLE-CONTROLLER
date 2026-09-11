@@ -23,9 +23,9 @@ class CandleCommand:
     """IR command codes for LED candles."""
 
     # Power commands (common across most candle remotes)
-    POWER = 0x45          # Power toggle (NEC protocol common value)
-    POWER_ON = 0x46       # Explicit power on
-    POWER_OFF = 0x47      # Explicit power off
+    POWER = 0x45  # Power toggle (NEC protocol common value)
+    POWER_ON = 0x46  # Explicit power on
+    POWER_OFF = 0x47  # Explicit power off
 
     # Brightness commands
     BRIGHTNESS_UP = 0x11
@@ -36,9 +36,9 @@ class CandleCommand:
     COLOR_TEMP_COOL = 0x1E
 
     # Effect modes
-    FLICKER = 0x0D        # Flame flicker effect
-    FLAT = 0x0E           # Flat/steady light
-    SNOWFLAKE = 0x0F      # Snowflake effect (if supported)
+    FLICKER = 0x0D  # Flame flicker effect
+    FLAT = 0x0E  # Flat/steady light
+    SNOWFLAKE = 0x0F  # Snowflake effect (if supported)
 
     # Numeric keypad for color selection on some remotes
     NUM_0 = 0x45
@@ -57,8 +57,8 @@ class CandleCommand:
     TIMER_2H = 0x41
     TIMER_4H = 0x42
     TIMER_8H = 0x43
-    MEM = 0x46            # Memory save
-    PLAY = 0x47           # Cycle through modes
+    MEM = 0x46  # Memory save
+    PLAY = 0x47  # Cycle through modes
 
     @classmethod
     def to_nec_command(cls, code: int) -> dict[str, int]:
