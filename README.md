@@ -1,43 +1,57 @@
-# LED Candle IR Controller for Home Assistant
+# LED Candle IR - Home Assistant Integration
 
-An Home Assistant custom integration for controlling LED flame candles via infrared (IR) signals.
+A HACS-customizable integration for controlling LED flame candles via infrared (IR) signals.
 
-## Overview
-
-This integration is adapted from the [LG Infrared integration](https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared) from Home Assistant Core. It provides a clean way to control your IR-enabled LED candles through Home Assistant.
+> **Adapted from:** [LG Infrared integration](https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared) in Home Assistant Core.
 
 ## Features
 
-- **Power Control**: Turn candles on/off
-- **Brightness Control**: Adjust brightness levels (low/medium/high) or use up/down buttons
-- **Effect Modes**: Toggle between flicker (flame) and flat (steady) modes
-- **Color Temperature**: Adjust warm/cool color temperature
-- **Timer Functions**: Set auto-off timers (1h, 2h, 4h, 8h) - optional entities
+- **Power Control** — Turn candles on/off via dedicated buttons
+- **Effect Modes** — Toggle between flicker (flame) and flat (steady) modes
+- **Brightness Control** — Select low/medium/high or use up/down buttons
+- **Color Temperature** — Adjust warm/cool color temperature
+- **Timer Functions** — Set auto-off timers (1h, 2h, 4h, 8h)
+- **Multiple Devices** — Supports single candles and candle string sets
+
+## Screenshots
+
+<!-- Add screenshots once you have them -->
+
+![Screenshot 1](docs/screenshot-1.png)
 
 ## Installation
 
-1. Copy the `candle_ir` folder to your Home Assistant `custom_components` directory:
+### Via HACS (Recommended)
+
+1. Open **HACS** in your Home Assistant dashboard
+2. Go to **Integrations** → click the **⋮** menu → **Custom repositories**
+3. Add this repository URL and select **Integration** as category
+4. Click **ADD**
+5. Find **LED Candle IR** in the integrations list and install it
+6. Restart Home Assistant
+7. Go to **Settings → Devices & Services → Add Integration** and search for "LED Candle IR"
+
+### Manual Installation
+
+1. Download the latest release ZIP from the [Releases page](https://github.com/YOUR_USERNAME/IR-Candle-Controller/releases)
+2. Extract the `custom_components` folder
+3. Copy it to your Home Assistant config directory:
    ```bash
-   cp -r candle_ir /path/to/home-assistant/config/custom_components/
+   cp -r custom_components/candle_ir /config/custom_components/
    ```
-
-2. Restart Home Assistant
-
-3. Go to **Settings → Devices & Services → Add Integration**
-
-4. Search for "LED Candle IR" and follow the setup wizard
+4. Restart Home Assistant
 
 ## ⚠️ Important: Customizing IR Codes
 
-The IR codes in `const.py` are **placeholder values**. You MUST replace them with the actual codes from your candle remote!
+The IR codes in `const.py` are **placeholder values**. You **must** replace them with the actual codes from your candle remote for this integration to work!
 
-### How to find your remote's IR codes:
+### How to find your remote's IR codes
 
 1. **Use an IR receiver** (like a TSOP38238) connected to an ESPHome device or Raspberry Pi
-2. **Use the Home Assistant `infrared` integration** to record raw signals
+2. **Use the Home Assistant `infrared` integration** to record raw signals from your remote
 3. **Look up your remote's code** online (search for your remote model + "NEC codes")
 
-### Common IR Remote Addresses for LED Candles:
+### Common IR Remote Addresses for LED Candles
 
 | Brand/Type | Address (hex) | Protocol |
 |------------|---------------|----------|
@@ -45,9 +59,9 @@ The IR codes in `const.py` are **placeholder values**. You MUST replace them wit
 | Some 4-key remotes | `0x00FF` | NEC |
 | RGBW remotes | `0xE0E0` | NEC |
 
-### To update the codes:
+### To update the codes
 
-Edit `/custom_components/candle_ir/const.py`:
+Edit `custom_components/candle_ir/const.py`:
 
 ```python
 class CandleCommand:
@@ -60,9 +74,22 @@ class CandleCommand:
     # ... etc
 ```
 
-## Entity Summary
+## Configuration
+
+After installation, add the integration via **Settings → Devices & Services**:
+
+1. Click **Add Integration**
+2. Search for **"LED Candle IR"**
+3. Choose your device type:
+   - **Single Candle** — for one candle with its own remote
+   - **Candle String/Set** — for a string/set sharing one remote
+4. Select an **IR emitter entity** (from your ESPHome IR blaster or similar)
+5. Optionally select an **IR receiver entity** to detect physical remote commands
+
+## Entities
 
 ### Buttons
+
 | Entity | Description |
 |--------|-------------|
 | Power | Toggle power on/off |
@@ -74,42 +101,106 @@ class CandleCommand:
 | Brightness down | Decrease brightness |
 | Color temp warm | Warmer color temperature |
 | Color temp cool | Cooler color temperature |
-| Timer 1-8h | Auto-off timers (disabled by default) |
+| Timer 1-8h | Auto-off timers (disabled by default, enable in entity settings) |
 
 ### Select Entities
+
 | Entity | Options |
 |--------|---------|
 | Effect mode | Flicker, Flat |
 | Brightness | Low, Medium, High |
 
 ### Switch Entities
+
 | Entity | Description |
 |--------|-------------|
 | Color temperature | Toggle between warm/cool (on=cool, off=warm) |
 
-## File Structure
+## Project Structure
 
 ```
-candle_ir/
-├── __init__.py          # Integration setup/teardown
-├── button.py            # Button entities (power, effects, etc.)
-├── config_flow.py       # UI configuration flow
-├── const.py             # Constants and IR command codes
-├── entity.py            # Base entity class
-├── manifest.json        # Integration metadata
-├── select.py            # Select entities (brightness, effects)
-├── strings.json         # Translations/UI strings
-└── switch.py            # Switch entities
+IR-Candle-Controller/
+├── .github/workflows/validate.yml   # HACS & Hassfest validation
+├── .gitignore
+├── CHANGELOG.md
+├── hacs.json                        # HACS metadata
+├── LICENSE
+├── README.md
+└── custom_components/
+    └── candle_ir/                   # Integration domain
+        ├── __init__.py              # Integration setup/teardown
+        ├── button.py                # Button entities
+        ├── config_flow.py           # UI configuration flow
+        ├── const.py                 # Constants and IR command codes
+        ├── entity.py                # Base entity class
+        ├── manifest.json            # Home Assistant manifest
+        ├── select.py                # Select entities (brightness, effects)
+        └── strings.json             # Translations/UI strings
 ```
 
-## Development Notes
+## Development
 
-This integration was adapted from the LG Infrared component. Key differences:
-- Simplified platform set (no climate/media_player needed for candles)
-- Custom IR command codes for candle remotes
-- Effect mode and brightness select entities
-- Timer function buttons
+### Prerequisites
+
+- Python 3.11+
+- Home Assistant development environment
+- An IR receiver to capture your remote's codes
+
+### Running Validation Locally
+
+```bash
+# Install Home Assistant dev dependencies
+pip install homeassistant[dev]
+
+# Validate the manifest
+python -m homeassistant.package_validation custom_components/
+```
+
+### Adding GitHub Actions
+
+The included `.github/workflows/validate.yml` runs:
+- **HACS validation** — checks HACS compliance
+- **Hassfest validation** — checks Home Assistant integration standards
+
+## Troubleshooting
+
+### Integration not loading
+
+1. Check the logs: **Settings → System → Logs**
+2. Verify `custom_components/candle_ir/` exists in your config directory
+3. Ensure all required files are present (see project structure above)
+4. Restart Home Assistant
+
+### IR commands not working
+
+1. **Verify your IR codes** — The placeholder codes won't work with your remote
+2. **Check emitter entity** — Make sure the selected IR emitter entity is available
+3. **Test with Home Assistant's infrared integration** — Use the developer tools to send raw IR signals
+4. **Enable debug logging**:
+
+```yaml
+# configuration.yaml
+logger:
+  default: warning
+  logs:
+    custom_components.candle_ir: debug
+```
+
+### Duplicate entity errors
+
+Make sure you haven't configured multiple candles pointing to the same IR emitter entity without distinct receiver entities.
 
 ## License
 
-This project is adapted from Home Assistant Core, which is licensed under the Apache 2.0 license.
+This project is licensed under the Apache 2.0 License. It is adapted from the Home Assistant Core LG Infrared integration.
+
+## Acknowledgments
+
+- [Home Assistant](https://www.home-assistant.io/) — The core platform
+- [HACS](https://hacs.xyz/) — Community Store for Home Assistant
+- [LG Infrared Integration](https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared) — Source of the original integration this was adapted from
+
+## Support
+
+- [GitHub Issues](https://github.com/YOUR_USERNAME/IR-Candle-Controller/issues) — Bug reports and feature requests
+- [Home Assistant Community Forum](https://community.home-assistant.io/) — General discussion

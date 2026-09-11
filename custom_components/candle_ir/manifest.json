@@ -1,0 +1,12 @@
+{
+  "domain": "candle_ir",
+  "name": "LED Candle IR",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/YOUR_USERNAME/IR-Candle-Controller",
+  "issue_tracker": "https://github.com/YOUR_USERNAME/IR-Candle-Controller/issues",
+  "dependencies": ["infrared"],
+  "codeowners": [],
+  "iot_class": "assumed_state",
+  "integration_type": "device"
+}

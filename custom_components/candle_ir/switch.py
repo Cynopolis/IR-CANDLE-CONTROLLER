@@ -1,12 +1,9 @@
-"""Switch platform for LED Candle IR integration.
+"""Switch platform for LED Candle IR integration."""
 
-Provides switch entities for features that have distinct on/off states.
-Adapted from:
-https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared/switch.py
-"""
+from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, override
+from typing import Any
 
 from homeassistant.components.infrared import InfraredEmitterConsumerEntity
 from homeassistant.components.switch import SwitchEntity, SwitchEntityDescription
@@ -18,7 +15,7 @@ from homeassistant.const import (
     EntityCategory,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
 from .const import CandleCommand
@@ -50,7 +47,7 @@ CANDLE_SWITCH_DESCRIPTIONS: tuple[CandleSwitchEntityDescription, ...] = (
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
-    async_add_entities: AddConfigEntryEntitiesCallback,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up Candle IR switches from config entry."""
     emitter_entity_id = entry.data.get("infrared_entity_id")
@@ -83,7 +80,6 @@ class CandleSwitch(CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, Re
         self.entity_description = description
         self._attr_is_on = False
 
-    @override
     async def async_added_to_hass(self) -> None:
         """Restore the assumed state."""
         await super().async_added_to_hass()
@@ -94,17 +90,17 @@ class CandleSwitch(CandleEntity, InfraredEmitterConsumerEntity, SwitchEntity, Re
         ):
             self._attr_is_on = last_state.state == STATE_ON
 
-    @override
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the feature on."""
         await self._send_command(CandleCommand.to_nec_command(self.entity_description.on_code))
         self._attr_is_on = True
         self.async_write_ha_state()
 
-    @override
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the feature off."""
         if self.entity_description.off_code is not None:
-            await self._send_command(CandleCommand.to_nec_command(self.entity_description.off_code))
+            await self._send_command(
+                CandleCommand.to_nec_command(self.entity_description.off_code)
+            )
         self._attr_is_on = False
         self.async_write_ha_state()

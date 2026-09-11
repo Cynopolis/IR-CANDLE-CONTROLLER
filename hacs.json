@@ -1,0 +1,8 @@
+{
+  "name": "LED Candle IR",
+  "zip_release": true,
+  "hide_default_branch": false,
+  "homeassistant": "2024.6.0",
+  "hacs": "1.34.0",
+  "filename": "candle_ir.zip"
+}

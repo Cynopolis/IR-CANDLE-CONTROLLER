@@ -1,14 +1,16 @@
 """Constants for the LED Candle IR integration."""
 
-from enum import StrEnum
+from __future__ import annotations
 
 DOMAIN = "candle_ir"
+
+# Configuration keys
 CONF_INFRARED_ENTITY_ID = "infrared_entity_id"
 CONF_INFRARED_RECEIVER_ENTITY_ID = "infrared_receiver_entity_id"
 CONF_DEVICE_TYPE = "device_type"
 
 
-class CandleDeviceType(StrEnum):
+class CandleDeviceType:
     """Candle device types."""
 
     CANDLE = "candle"
@@ -59,7 +61,7 @@ class CandleCommand:
     PLAY = 0x47           # Cycle through modes
 
     @classmethod
-    def to_nec_command(cls, code: int) -> dict:
+    def to_nec_command(cls, code: int) -> dict[str, int]:
         """Convert a command code to NEC protocol format."""
         return {
             "address": 0xFAC0,  # Common LED candle remote address

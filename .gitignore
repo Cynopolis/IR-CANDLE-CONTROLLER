@@ -1,14 +1,27 @@
 # Home Assistant core reference (LG IR integration source)
 # Source: https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared
-candle_ir/__init__.py.orig
-candle_ir/button.py.orig
-candle_ir/climate.py.orig
-candle_ir/config_flow.py.orig
-candle_ir/const.py.orig
-candle_ir/entity.py.orig
-candle_ir/event.py.orig
-candle_ir/media_player.py.orig
-candle_ir/select.py.orig
-candle_ir/strings.json.orig
-candle_ir/switch.py.orig
-candle_ir/manifest.json.orig
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Home Assistant
+home-assistant_*.db
+home-assistant_v2.db
+home-assistant.log
+

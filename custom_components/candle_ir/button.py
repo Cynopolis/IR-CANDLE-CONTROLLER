@@ -1,18 +1,16 @@
-"""Button platform for LED Candle IR integration.
+"""Button platform for LED Candle IR integration."""
 
-Adapted from:
-https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared/button.py
-"""
+from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import override
+from typing import Any
 
 from homeassistant.components.button import ButtonEntity, ButtonEntityDescription
 from homeassistant.components.infrared import InfraredEmitterConsumerEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import CandleCommand
 from .entity import CandleEntity
@@ -80,24 +78,32 @@ TIMER_BUTTON_DESCRIPTIONS: tuple[CandleButtonEntityDescription, ...] = (
 # Brightness buttons
 BRIGHTNESS_BUTTON_DESCRIPTIONS: tuple[CandleButtonEntityDescription, ...] = (
     CandleButtonEntityDescription(
-        key="brightness_up", translation_key="brightness_up", command_code=CandleCommand.BRIGHTNESS_UP
+        key="brightness_up",
+        translation_key="brightness_up",
+        command_code=CandleCommand.BRIGHTNESS_UP,
     ),
     CandleButtonEntityDescription(
-        key="brightness_down", translation_key="brightness_down", command_code=CandleCommand.BRIGHTNESS_DOWN
+        key="brightness_down",
+        translation_key="brightness_down",
+        command_code=CandleCommand.BRIGHTNESS_DOWN,
     ),
 )
 
 # Color temperature buttons
 COLOR_TEMP_BUTTON_DESCRIPTIONS: tuple[CandleButtonEntityDescription, ...] = (
     CandleButtonEntityDescription(
-        key="color_temp_warm", translation_key="color_temp_warm", command_code=CandleCommand.COLOR_TEMP_WARM
+        key="color_temp_warm",
+        translation_key="color_temp_warm",
+        command_code=CandleCommand.COLOR_TEMP_WARM,
     ),
     CandleButtonEntityDescription(
-        key="color_temp_cool", translation_key="color_temp_cool", command_code=CandleCommand.COLOR_TEMP_COOL
+        key="color_temp_cool",
+        translation_key="color_temp_cool",
+        command_code=CandleCommand.COLOR_TEMP_COOL,
     ),
 )
 
-ALL_BUTTON_DESCRIPTIONS = (
+ALL_BUTTON_DESCRIPTIONS: tuple[CandleButtonEntityDescription, ...] = (
     CANDLE_BUTTON_DESCRIPTIONS
     + TIMER_BUTTON_DESCRIPTIONS
     + BRIGHTNESS_BUTTON_DESCRIPTIONS
@@ -108,10 +114,11 @@ ALL_BUTTON_DESCRIPTIONS = (
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
-    async_add_entities: AddConfigEntryEntitiesCallback,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up Candle IR buttons from config entry."""
-    if not (infrared_entity_id := entry.data.get("infrared_entity_id")):
+    infrared_entity_id = entry.data.get("infrared_entity_id")
+    if not infrared_entity_id:
         return
 
     device_name = entry.options.get("device_name", "LED Candle")
@@ -140,7 +147,8 @@ class CandleButton(CandleEntity, InfraredEmitterConsumerEntity, ButtonEntity):
         self._infrared_emitter_entity_id = infrared_entity_id
         self.entity_description = description
 
-    @override
     async def async_press(self) -> None:
         """Press the button."""
-        await self._send_command(CandleCommand.to_nec_command(self.entity_description.command_code))
+        await self._send_command(
+            CandleCommand.to_nec_command(self.entity_description.command_code)
+        )

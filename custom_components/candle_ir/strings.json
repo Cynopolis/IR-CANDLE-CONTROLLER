@@ -15,7 +15,7 @@
         },
         "data_description": {
           "infrared_entity_id": "[%key:common::config_flow::data_description::infrared_entity_id%]",
-          "infrared_receiver_entity_id": "Optional — allows the integration to detect when the physical remote is used."
+          "infrared_receiver_entity_id": "Optional \u2014 allows the integration to detect when the physical remote is used."
         },
         "description": "Select an infrared emitter for your LED candle.",
         "title": "Set up LED Candle"
@@ -27,7 +27,7 @@
         },
         "data_description": {
           "infrared_entity_id": "[%key:common::config_flow::data_description::infrared_entity_id%]",
-          "infrared_receiver_entity_id": "Optional — allows the integration to detect when the physical remote is used."
+          "infrared_receiver_entity_id": "Optional \u2014 allows the integration to detect when the physical remote is used."
         },
         "description": "Select an infrared emitter for your candle string/set.",
         "title": "Set up Candle String"
