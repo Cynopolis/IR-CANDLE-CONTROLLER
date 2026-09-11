@@ -8,6 +8,22 @@ The integration provides power control, effect mode selection, brightness adjust
 
 ---
 
+## 🚫 BANNED: Git Operations
+
+**Agents are banned from performing ANY git operations in this repository.**
+
+This includes, but is not limited to:
+- `git add`, `git commit`, `git push`, `git pull`, `git fetch`, `git merge`, `git rebase`, `git checkout`, `git switch`, `git stash`, `git tag`, `git reset`, `git revert`, `git cherry-pick`, `git worktree`
+- Any other `git` command, including read-only ones like `git status`, `git log`, `git diff`, `git show`, `git branch`
+- Creating, modifying, or deleting git refs, branches, tags, or the repository state in any way
+
+All version control is handled **exclusively by the human developer**. Agents should:
+- Make file edits only (edit/write files)
+- If a change needs to be committed or pushed, **tell the user what to commit** and let them do it
+- Never push to any branch, including the default branch
+
+---
+
 ## ⚠️ CRITICAL: Folder Layout
 
 **This project follows HACS conventions. The folder structure is non-negotiable.**
