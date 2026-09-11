@@ -4,9 +4,9 @@
   "codeowners": [],
   "config_flow": true,
   "dependencies": ["infrared"],
-  "documentation": "https://github.com/YOUR_USERNAME/IR-Candle-Controller",
-  "iot_class": "assumed_state",
+  "documentation": "https://github.com/Cynopolis/IR-Candle-Controller",
   "integration_type": "device",
-  "issue_tracker": "https://github.com/YOUR_USERNAME/IR-Candle-Controller/issues",
+  "iot_class": "assumed_state",
+  "issue_tracker": "https://github.com/Cynopolis/IR-Candle-Controller/issues",
   "version": "0.0.1"
 }

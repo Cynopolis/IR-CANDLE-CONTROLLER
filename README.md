@@ -30,18 +30,18 @@ Have [HACS](https://hacs.xyz/) installed, this will allow you to update easily.
 
 Adding LED Candle IR to HACS can be done using this button:
 
-[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=YOUR_USERNAME&repository=IR-Candle-Controller&category=integration)
+[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Cynopolis&repository=IR-Candle-Controller&category=integration)
 
 > [!NOTE]
-> If the button above doesn't work, add `https://github.com/YOUR_USERNAME/IR-Candle-Controller` as a custom repository of type **Integration** in HACS.
+> If the button above doesn't work, add `https://github.com/Cynopolis/IR-Candle-Controller` as a custom repository of type **Integration** in HACS.
 
-* Click **Download** on the **LED Candle IR** integration.
-* Restart Home Assistant.
-* Go to **Settings → Devices & Services → Add Integration** and search for "LED Candle IR"
+- Click **Download** on the **LED Candle IR** integration.
+- Restart Home Assistant.
+- Go to **Settings → Devices & Services → Add Integration** and search for "LED Candle IR"
 
 ### Manual Installation
 
-1. Download the latest release ZIP from the [Releases page](https://github.com/YOUR_USERNAME/IR-Candle-Controller/releases)
+1. Download the latest release ZIP from the [Releases page](https://github.com/Cynopolis/IR-Candle-Controller/releases)
 2. Extract the `custom_components` folder
 3. Copy it to your Home Assistant config directory:
    ```bash
@@ -61,11 +61,11 @@ The IR codes in `const.py` are **placeholder values**. You **must** replace them
 
 ### Common IR Remote Addresses for LED Candles
 
-| Brand/Type | Address (hex) | Protocol |
-|------------|---------------|----------|
-| Generic Chinese remotes | `0xFAC0` | NEC |
-| Some 4-key remotes | `0x00FF` | NEC |
-| RGBW remotes | `0xE0E0` | NEC |
+| Brand/Type              | Address (hex) | Protocol |
+| ----------------------- | ------------- | -------- |
+| Generic Chinese remotes | `0xFAC0`      | NEC      |
+| Some 4-key remotes      | `0x00FF`      | NEC      |
+| RGBW remotes            | `0xE0E0`      | NEC      |
 
 ### To update the codes
 
@@ -98,30 +98,30 @@ After installation, add the integration via **Settings → Devices & Services**:
 
 ### Buttons
 
-| Entity | Description |
-|--------|-------------|
-| Power | Toggle power on/off |
-| Power on | Explicit power on |
-| Power off | Explicit power off |
-| Flicker mode | Switch to flame flicker effect |
-| Flat mode | Switch to steady light |
-| Brightness up | Increase brightness |
-| Brightness down | Decrease brightness |
-| Color temp warm | Warmer color temperature |
-| Color temp cool | Cooler color temperature |
-| Timer 1-8h | Auto-off timers (disabled by default, enable in entity settings) |
+| Entity          | Description                                                      |
+| --------------- | ---------------------------------------------------------------- |
+| Power           | Toggle power on/off                                              |
+| Power on        | Explicit power on                                                |
+| Power off       | Explicit power off                                               |
+| Flicker mode    | Switch to flame flicker effect                                   |
+| Flat mode       | Switch to steady light                                           |
+| Brightness up   | Increase brightness                                              |
+| Brightness down | Decrease brightness                                              |
+| Color temp warm | Warmer color temperature                                         |
+| Color temp cool | Cooler color temperature                                         |
+| Timer 1-8h      | Auto-off timers (disabled by default, enable in entity settings) |
 
 ### Select Entities
 
-| Entity | Options |
-|--------|---------|
-| Effect mode | Flicker, Flat |
-| Brightness | Low, Medium, High |
+| Entity      | Options           |
+| ----------- | ----------------- |
+| Effect mode | Flicker, Flat     |
+| Brightness  | Low, Medium, High |
 
 ### Switch Entities
 
-| Entity | Description |
-|--------|-------------|
+| Entity            | Description                                  |
+| ----------------- | -------------------------------------------- |
 | Color temperature | Toggle between warm/cool (on=cool, off=warm) |
 
 ## Project Structure
@@ -167,6 +167,7 @@ python -m homeassistant.package_validation custom_components/
 ### Adding GitHub Actions
 
 The included `.github/workflows/validate.yml` runs:
+
 - **HACS validation** — checks HACS compliance
 - **Hassfest validation** — checks Home Assistant integration standards
 
@@ -210,10 +211,10 @@ This project is licensed under the Apache 2.0 License. It is adapted from the Ho
 
 ## Support
 
-- [GitHub Issues](https://github.com/YOUR_USERNAME/IR-Candle-Controller/issues) — Bug reports and feature requests
+- [GitHub Issues](https://github.com/Cynopolis/IR-Candle-Controller/issues) — Bug reports and feature requests
 - [Home Assistant Community Forum](https://community.home-assistant.io/) — General discussion
 
 [hacs-badge]: https://img.shields.io/badge/HACS-Default-orange.svg?logo=HomeAssistantCommunityStore&logoColor=white
 [hacs]: https://hacs.xyz
-[action-badge]: https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/IR-Candle-Controller/ci.yml?branch=main&style=for-the-badge
-[action]: https://github.com/YOUR_USERNAME/IR-Candle-Controller/actions
+[action-badge]: https://img.shields.io/github/actions/workflow/status/Cynopolis/IR-Candle-Controller/ci.yml?branch=main&style=for-the-badge
+[action]: https://github.com/Cynopolis/IR-Candle-Controller/actions

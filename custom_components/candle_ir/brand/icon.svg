@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45">
+  <!-- Flame outer -->
+  <path d="M22.5 4 C26.5 9, 29 11.5, 29 16.5 A6.5 6.5 0 0 1 15.5 16.5 C15.5 11.5, 18.5 9, 22.5 4 Z" fill="#FF8F00"/>
+  <!-- Flame inner -->
+  <path d="M22.5 10 C24.5 12.5, 26 14, 26 17 A3.5 3.5 0 0 1 19 17 C19 14, 20.5 12.5, 22.5 10 Z" fill="#FFE082"/>
+  <!-- Wick -->
+  <rect x="21.5" y="23" width="2" height="3.5" fill="#5D4037"/>
+  <!-- Candle body -->
+  <rect x="15" y="26.5" width="15" height="14" rx="1.5" fill="#FFF8E1" stroke="#E0C9A6" stroke-width="1"/>
+</svg>
