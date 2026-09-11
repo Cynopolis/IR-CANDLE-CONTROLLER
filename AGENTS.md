@@ -193,7 +193,27 @@ def to_nec_command(cls, code: int) -> dict[str, int]:
 
 ## CI / Validation
 
-`.github/workflows/validate.yml` runs two jobs on every push/PR:
+Three GitHub Actions workflows live in `.github/workflows/`:
+
+### `ci.yml` — Full CI Pipeline (adapted from HASS-Habit-Tracker)
+Runs on push/PR to `main` or `develop`. Five jobs:
+1. **json** — validates every `.json` file parses correctly
+2. **py_compile** — runs `python -m py_compile` on all `.py` files in `custom_components/` across Python 3.12 and 3.13
+3. **lint** — runs `ruff check` (fails on errors) and `ruff format --check` (warns only)
+4. **schema** — validates `manifest.json` (domain matches folder, version present) and `hacs.json` (name present)
+5. **structure** — checks all required integration files exist (`__init__.py`, `manifest.json`, `button.py`, `select.py`, `switch.py`, `config_flow.py`, `strings.json`, `hacs.json`, `README.md`, `LICENSE`)
+
+A final **status** job reports combined pass/fail.
+
+### `release.yml` — Automated GitHub Releases (adapted from HASS-Habit-Tracker)
+Runs on push to `main` or manually via `workflow_dispatch`. Creates a GitHub Release:
+1. Reads version from `custom_components/candle_ir/manifest.json`
+2. Checks if release `v{version}` already exists (skips if so)
+3. Zips `custom_components/candle_ir/` → `candle_ir.zip`
+4. Uploads the zip as a release asset via `softprops/action-gh-release@v2`
+
+### `validate.yml` — HACS + Hassfest Basic Validation
+Runs on every push/PR. Two jobs:
 - **hacs** — validates HACS compliance via `hacs/action`
 - **hassfest** — validates HA integration standards via `home-assistant/actions/hassfest`
 

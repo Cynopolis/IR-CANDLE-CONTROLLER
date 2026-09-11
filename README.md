@@ -1,5 +1,8 @@
 # LED Candle IR - Home Assistant Integration
 
+[![HACS Default][hacs-badge]][hacs]
+[![GitHub Workflow Status][action-badge]][action]
+
 A HACS-customizable integration for controlling LED flame candles via infrared (IR) signals.
 
 > **Adapted from:** [LG Infrared integration](https://github.com/home-assistant/core/tree/dev/homeassistant/components/lg_infrared) in Home Assistant Core.
@@ -23,13 +26,18 @@ A HACS-customizable integration for controlling LED flame candles via infrared (
 
 ### Via HACS (Recommended)
 
-1. Open **HACS** in your Home Assistant dashboard
-2. Go to **Integrations** → click the **⋮** menu → **Custom repositories**
-3. Add this repository URL and select **Integration** as category
-4. Click **ADD**
-5. Find **LED Candle IR** in the integrations list and install it
-6. Restart Home Assistant
-7. Go to **Settings → Devices & Services → Add Integration** and search for "LED Candle IR"
+Have [HACS](https://hacs.xyz/) installed, this will allow you to update easily.
+
+Adding LED Candle IR to HACS can be done using this button:
+
+[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=YOUR_USERNAME&repository=IR-Candle-Controller&category=integration)
+
+> [!NOTE]
+> If the button above doesn't work, add `https://github.com/YOUR_USERNAME/IR-Candle-Controller` as a custom repository of type **Integration** in HACS.
+
+* Click **Download** on the **LED Candle IR** integration.
+* Restart Home Assistant.
+* Go to **Settings → Devices & Services → Add Integration** and search for "LED Candle IR"
 
 ### Manual Installation
 
@@ -204,3 +212,8 @@ This project is licensed under the Apache 2.0 License. It is adapted from the Ho
 
 - [GitHub Issues](https://github.com/YOUR_USERNAME/IR-Candle-Controller/issues) — Bug reports and feature requests
 - [Home Assistant Community Forum](https://community.home-assistant.io/) — General discussion
+
+[hacs-badge]: https://img.shields.io/badge/HACS-Default-orange.svg?logo=HomeAssistantCommunityStore&logoColor=white
+[hacs]: https://hacs.xyz
+[action-badge]: https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/IR-Candle-Controller/ci.yml?branch=main&style=for-the-badge
+[action]: https://github.com/YOUR_USERNAME/IR-Candle-Controller/actions
